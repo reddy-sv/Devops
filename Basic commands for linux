@@ -7,4 +7,4 @@ mkdir dirname
 #create a empty files
 touch file1
 #editing purpose
-vi
+vi and Cat >>filename
