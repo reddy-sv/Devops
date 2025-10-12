@@ -1,0 +1,10 @@
+#list the files
+ls -l
+#listing including hidden files
+ls -la
+#create a directory
+mkdir dirname
+#create a empty files
+touch file1
+#editing purpose
+vi and Cat >>filename
