@@ -10,7 +10,10 @@ git add .
 git commit -m "Your commit message"
 
 4. Push changes to Bitbucket
-git push origin branch-name
+git push
+
+if need to copy in sub/feautre branch run below
+git push origin branchname
 
 5. Pull latest changes
 git pull origin branch-name
@@ -19,13 +22,10 @@ git pull origin branch-name
 git status
 
 7. Create a new branch
-git checkout -b new-branch-name
+git checkout new-branch-name
 
 8. Switch branches
 git checkout branch-name
 
 9. Merge a branch
 git merge other-branch-name
-
-10. Delete a branch
-git branch -d branch-name
