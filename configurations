@@ -1,0 +1,30 @@
+##Git Configuration
+git config --global user.name "Your Name"
+git config --global user.email "youremail@example.com"
+
+##Check your Git configuration:
+git config --list
+
+##Initialize a new Git repository:
+git init
+
+##Clone an existing repository:
+git clone <repository-url>
+
+##Check the status of your repository:
+git status
+
+##Stage a specific file for commit:
+git add <filename>
+
+##Stage all files for commit:
+git add .
+
+##Unstage a file (if you added it by mistake):
+git reset <filename>
+
+##Commit changes:
+git commit -m "Your commit message"
+
+##View the commit history:
+git log
