@@ -1,0 +1,10 @@
+29-Dec-2021 to 29-July-2025 >>>> 3.7Years >>> WIPRO (4.8LPA)
+17-Sep-2025 to 17-Apr-2026 >>>> 7Months >>> AIFA (6LPA)
+04-May-2026 join new company (Product based with 15LPA).
+
+Week 1-2 (10-oct to 23-Oct) >>>>>>>>>>>>> Git / GitHub
+Week 3-4 (24-oct to 06-Nov) >>>>>>>> Terraform (Ec2, S3, VPC, IAM) 
+Week 5-6 (07-Nov to 20-Nov) >>>>>>>>>>>>> Docker
+Week 7-8 (21-Nov to 04-Dec) >>>>>>>>>>>>> K8s, EKS
+Week 9-10 (05-Dec to 18-Dec) >>>>>>>>>>>>> Ansible
+Week 5-6 (19-Dec to 31-Dec) >>>>>>>>>>>>>> Jenkins
