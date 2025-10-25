@@ -1,0 +1,50 @@
+>>>>>>>>>>>>Git Merge
+Purpose: Combine changes from one branch into another branch by creating a new commit that preserves the history of both branches.
+
+Key Points
+
+Combines the histories of two branches.
+Maintains the original commit history (no rewriting).
+Creates a merge commit if branches have diverged.
+Safe for shared/public branches.
+
+LAB:
+Suppose we have:
+main: A---B---C
+feature: D---E
+Step 1: Switch to main branch #git checkout main
+Step 2: Merge feature branch #git merge feature
+Result:
+main: A---B---C-------F
+                \   /
+feature:         D---E
+
+F is the merge commit.
+History of feature branch is preserved.
+All commits are visible.
+=============================================================
+
+>>>>>>>>>>>>>>Git Rebase
+Purpose: Move or “reapply” commits from one branch onto another branch linearly, rewriting history.
+
+Key Points
+
+Makes history linear (no merge commits).
+Reapplies commits from feature branch onto the tip of main.
+Can make history cleaner.
+Can be dangerous on shared branches (rewrites commit hashes).
+
+LAB:
+Original:
+main: A---B---C
+feature: D---E
+
+Step 1: Switch to feature branch #git checkout feature
+Step 2: Rebase onto main #git rebase main
+Result:
+main:    A---B---C
+feature:          D'---E'
+
+D' and E' are new commits (hashes changed).
+History is now linear.
+No merge commit is created.
