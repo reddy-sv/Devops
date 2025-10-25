@@ -1,0 +1,23 @@
+"When I’m in the middle of development and suddenly need to fix an urgent issue in another branch, I use git stash to temporarily save my current changes and switch branches safely."
+
+###Save current (tracked changes) and clean working directory
+git stash
+
+###Save tracked + untracked files
+git stash -u
+
+###Show list of all stash entries
+git stash list
+
+###Apply (restore) stashed changes but keep stash in list
+git stash apply
+
+###Apply (restore) stashed changes and remove from stash list
+git stash pop
+
+###Delete a specific stash entry
+git stash drop stash@{0}
+
+###Delete all stash entries
+git stash clear
+
