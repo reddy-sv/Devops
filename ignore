@@ -1,0 +1,28 @@
+.gitignore
+
+.gitignore is a special text file in a Git repository.
+It tells Git which files or directories to ignore — meaning Git will not track, stage, or commit them.
+Purpose: prevent sensitive files, temporary files, or unnecessary files from being added to the repo.
+Think of .gitignore as a “do not track” list for Git.
+
+Step 1: Initialize Git repository
+git init
+
+Step 2: Create some sample files
+echo "This is my personal note" > note.txt
+echo "SECRET_KEY=12345" > .env
+mkdir temp
+echo "Temporary file" > temp/temp.txt
+
+Step 3: Create .gitignore
+vi .gitignore
+.env
+temp/
+
+Step 4: Check which files Git sees
+git status
+
+if we want to forec add the ignored file
+git add -f per.txt
+vi .gittgnore
+remove &wq!
