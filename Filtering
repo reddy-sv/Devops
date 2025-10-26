@@ -1,0 +1,21 @@
+### if we want to see commit history including commit hash
+git log
+
+###if we shows each commit in a single line
+git log --oneline
+
+###shows only the most recent n(number)  commits in one line format
+git log --oneline n 5
+
+###filtering commits made by specific author
+git log --author "subbareddy"
+
+###shows commits made after certain date
+git log --since "21-12-2025"
+in specific range
+git log --since "dd-mm-yy" untill "dd-mm-yy"
+
+###difference between two commits
+git diff <commit1><commit2>
+
+

@@ -1,0 +1,17 @@
+Git Fetch
+Purpose:
+
+git fetch downloads changes from the remote repository to your local repository, but does not merge them automatically.
+It updates your remote tracking branches (like origin/main), letting you see what has changed without touching your working branch.
+
+#git fetch origin
+=======================================================
+
+Git Pull
+Purpose:
+
+git pull is a shortcut for git fetch + git merge (or git fetch + git rebase, if configured).
+It fetches changes and automatically merges them into your current branch.
+
+#git pull origin main
+
