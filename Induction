@@ -1,0 +1,26 @@
+Terraform is an open-source Infrastructure as Code (IaC) tool developed by HashiCorp.
+It allows you to define, provision, and manage infrastructure across cloud providers (like AWS, Azure, Google Cloud) and on-premises environments using a simple, declarative configuration language called HCL (HashiCorp Configuration Language).
+
+Terraform:
+
+Terraform lets you describe your infrastructure using configuration files.
+It then automatically:
+
+Creates the resources (servers, networks, databases, etc.),
+Manages them, and
+Destroys them when not needed.
+
+>>>>>>>>>>>>>>>>>> You just tell Terraform what you want, and it figures out how to make it happen.
+
+Infrastructure as Code (IaC):
+
+Traditionally, system administrators had to manually create and configure infrastructure — such as virtual machines, networks, and storage — through consoles or scripts.
+Infrastructure as Code solves this by letting you:
+
+Define infrastructure in code files.
+Automate deployment.
+Track changes in version control (like Git).
+Ensure consistency across environments (dev, test, prod).
+
+Terraform is one of the most popular IaC tools.
+
