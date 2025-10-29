@@ -1,0 +1,10 @@
+| Feature           | Description                            |
+| ----------------- | -------------------------------------- |
+| **Tool Type**     | Infrastructure as Code                 |
+| **Language**      | HCL (HashiCorp Configuration Language) |
+| **Purpose**       | Automate and manage infrastructure     |
+| **Supports**      | Multi-cloud and hybrid environments    |
+| **Main Files**    | `.tf`, `.tfstate`, `.tfvars`           |
+| **Main Commands** | init, plan, apply, destroy             |
+| **Developer**     | HashiCorp                              |
+
