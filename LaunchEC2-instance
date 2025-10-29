@@ -1,0 +1,26 @@
+Create a folder and files:
+main.tf
+variables.tf
+
+### In main.tf:
+
+provider "aws" {
+  region = "eu-north-1"
+}
+
+resource "aws_instance" "web" {
+  ami           = "ami-0aa78f446b4499266"
+  instance_type = var.instance_type
+  tags = {
+    Name = "Terraform-Server"
+  }
+}
+
+
+### In variables.tf:
+
+variable "instance_type" {
+  default = "t2.micro"
+}
+
+>>>>>>>>>>>>>>>>>>> Terraform will create the EC2 instance in your AWS account
