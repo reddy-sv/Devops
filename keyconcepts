@@ -1,0 +1,45 @@
+### Providers
+Plugins that allow Terraform to interact with APIs of different platforms (AWS, Azure, GCP, VMware, etc.).
+
+Eg:
+
+provider "aws" {
+  region = "eu-north-1"
+}
+
+
+### Resources
+Actual infrastructure components (VMs, networks, etc.) that Terraform creates.
+
+Eg:
+
+resource "aws_s3_bucket" "mybucket" {
+  bucket = "my-demo-bucket"
+}
+
+
+### Variables
+Used to make configurations dynamic and reusable.
+
+Eg:
+
+variable "instance_type" {
+  default = "t2.micro"
+}
+
+>>>>>>> You are creating a variable named instance_type.
+>>>>>>> If you don’t manually provide a value, Terraform will use the default value — "t2.micro".
+
+Example in a Terraform resource:
+
+resource "aws_instance" "myserver" {
+  ami           = "ami-0aa78f446b4499266"
+  instance_type = var.instance_type
+}
+
+var.instance_type will automatically take the value from your variable definition.
+If no other value is provided, it uses the default "t2.micro".
+
+### State File
+A .tfstate file stores the real-world mapping of your resources.
+Terraform uses it to know what exists and what needs to change.
