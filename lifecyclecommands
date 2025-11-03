@@ -1,0 +1,67 @@
+Basic setup & information:
+
+###docker version
+Verify setup after install  (check Docker client +daemon version)
+
+###docker info
+check total running containers (show system info containers, images,etc.......)
+
+###systemctl status docker
+Troubleshoort "cannot connect to daemon" (check if docker daemon is active)
+
+###systemctl start docker
+Start daemon on Linux VM (Start Docker service)
+
+==================================================================================
+
+Image Managment commands:
+
+###docker images
+see which app versions are built (List all avialable images locally)
+
+###docker pull <image>
+docker pull amazonlinux (Download image from registory)
+
+###docker rmi <image>
+Remove an image
+
+###docker image prune
+Free up disk space on host (Clean up unused images)
+
+======================================================================================
+
+Container Lifecycle commands:
+
+###docker ps 
+shows all even stopped (show running containers)
+
+###docker run <image>
+Run a new container
+
+###docker start <cid>
+start stopped container
+
+###docker stop <cid>
+stop running container
+
+###docker restart <cid>
+common after config change (Restart container)
+
+###docker rm <cid>
+remove container
+
+###docker exec -it <cid/name> bash
+Debug live container (open shell inside container)
+
+###docker logs -f <cid/name>
+Monitor container output (View live logs)
+
+###docker pause <cid/name>
+Pause the container (can't login, start & stop)
+
+###docker unpause <cid/name>
+start the service if it's paused state
+
+###docker commit "cid/name"
+container to image converter.
+
