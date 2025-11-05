@@ -96,3 +96,4 @@ Rename a Container:
 Inspect a Container (to get detailed information about the container's configuration):
 ###docker inspect <container_name_or_id>
 --------------------------------------------------------------------------------------------------
+port mapping 
