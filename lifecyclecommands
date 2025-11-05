@@ -96,4 +96,8 @@ Rename a Container:
 Inspect a Container (to get detailed information about the container's configuration):
 ###docker inspect <container_name_or_id>
 --------------------------------------------------------------------------------------------------
+<<<<<<< HEAD
 network mapping 
+=======
+port mapping 
+>>>>>>> 8f093d7c51c38a1d08442383bd3816d17a4d4066
