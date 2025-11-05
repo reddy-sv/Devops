@@ -29,39 +29,70 @@ Remove an image
 Free up disk space on host (Clean up unused images)
 
 ======================================================================================
-
 Container Lifecycle commands:
+============================================
+###Starting and Stopping Containers
 
-###docker ps 
-shows all even stopped (show running containers)
+Start a Container (from stopped state):
+###docker start <container_name_or_id>
 
-###docker run <image>
-Run a new container
+Stop a Running Container:
+###docker stop <container_name_or_id>
 
-###docker start <cid>
-start stopped container
+Restart a Running Container:
+###docker restart <container_name_or_id>
 
-###docker stop <cid>
-stop running container
+Pause a Running Container:
+###docker pause <container_name_or_id>
 
-###docker restart <cid>
-common after config change (Restart container)
+Unpause a Paused Container:
+###docker unpause <container_name_or_id>
+--------------------------------------------------------------------------------------
 
-###docker rm <cid>
-remove container
+###Container Interaction and Access
 
-###docker exec -it <cid/name> bash
-Debug live container (open shell inside container)
+Image to container convert with name
+###docker run --name <containername> <imagename>
 
-###docker logs -f <cid/name>
-Monitor container output (View live logs)
+Run a New Container (with interactive terminal):
+###docker run -it <image_name> bash
 
-###docker pause <cid/name>
-Pause the container (can't login, start & stop)
+Execute a Command Inside a Running Container:
+###docker exec -it <container_name_or_id> <command>
 
-###docker unpause <cid/name>
-start the service if it's paused state
+Access to running container
+###docker exec -it <cid/imagename>
 
-###docker commit "cid/name"
-container to image converter.
+Attach to a Running Container (connect to the main process):
+###docker attach <container_name_or_id>
 
+Exit a Container Session (from docker exec or docker run):
+###exit
+--------------------------------------------------------------------------------------
+
+###Viewing and Managing Container Status
+
+List All Containers (including stopped):
+###docker ps -a 
+
+View Container Logs (for troubleshooting):
+###docker logs <container_name_or_id>
+
+Follow the Logs (real-time stream):
+###docker logs -f <container_name_or_id>
+----------------------------------------------------------------------------------------
+
+###Managing Containers
+
+Remove a Stopped Container:
+###docker rm <container_name_or_id>
+
+Remove All Stopped Containers:
+###docker container prune
+
+Rename a Container:
+###docker rename <old_container_name_or_id> <new_container_name>
+
+Inspect a Container (to get detailed information about the container's configuration):
+###docker inspect <container_name_or_id>
+--------------------------------------------------------------------------------------------------
