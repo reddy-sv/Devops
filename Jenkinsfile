@@ -3,7 +3,7 @@ pipeline {
     // Defines where the pipeline will run. 'any' means any available agent (node).
     agent any 
 
-    // Optional: Global environment variables for the entire pipeline
+    // Optional: Global environment variables for the entire pipelines
     environment {
         // You would typically use Jenkins Credentials for actual sensitive tokens
         // GIT_CREDENTIALS_ID = 'your-github-credential-id' 
