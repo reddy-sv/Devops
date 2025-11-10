@@ -1,6 +1,6 @@
 // Jenkins
 pipeline {
-    // Defines where the pipeline will run. 'any' means any available agent (node).
+    // Defines where the pipeline will run. 'any' means any available agentd (node).
     agent any 
 
     // Optional: Global environment variables for the entire pipelines
