@@ -7,8 +7,8 @@ pipeline {
     environment {
         // You would typically use Jenkins Credentials for actual sensitive tokens
         // GIT_CREDENTIALS_ID = 'your-github-credential-id' 
-        REPO = 'your-github-org/your-repo-name'
-        BRANCH = 'main'
+        REPO = 'https://github.com/reddy-sv/Devops'
+        BRANCH = 'jenkins'
     }
 
     // Stages define a conceptual division of the work (e.g., Build, Test, Deploy)
