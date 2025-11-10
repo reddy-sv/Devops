@@ -11,7 +11,7 @@ pipeline {
         BRANCH = 'jenkins'
     }
 
-    // Stages define a conceptual division of the work (e.g., Build, Test, Deploy)
+    // Stages define a conceptual division of the workss (e.g., Build, Test, Deploy)
     stages {
         stage('Checkout Source Code') {
             steps {
