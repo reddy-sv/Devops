@@ -1,4 +1,4 @@
-// Jenkinsfile
+// Jenkins
 pipeline {
     // Defines where the pipeline will run. 'any' means any available agent (node).
     agent any 
