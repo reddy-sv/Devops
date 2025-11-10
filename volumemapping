@@ -1,0 +1,95 @@
+Volume Mapping:
+
+When you run a Docker container, it has its own isolated filesystem (created from the image).
+So if you create or modify files inside the container, they’re lost when:
+
+The container stops or is removed.
+You rebuild the container.
+
+Creation volume #docker volume create
+list the volumes #docker volume ls
+remove the volume #docker volume remove rm volumename
+remove multiple at a time #docker rm volume1 volume2
+Delete All Unused Volumes #docker volume prune
+Delete All Volumes (Force) #docker rm -f $(docker ps -aq)   # Remove all containers first
+                           #docker volume rm $(docker volume ls -q)
+
+
+👉 Volume mapping solves this by connecting (or “mapping”) host machine storage with container storage.
+
+####Types of Volume Mapping in Docker:
+Docker supports 3 main types of volume mapping:
+
+
+| Type                      | Where Data Lives              | Created By           | Use Case                                |
+| ------------------------- | ----------------------------- | -------------------- | --------------------------------------- |
+|     **Bind Mounts**       | On Host (you choose the path) | User                 | For development (you want live updates) |
+|     **Named Volumes**     | In Docker-managed location    | Docker               | For production or persistent data       |
+|     **Anonymous Volumes** | In Docker-managed location    | Docker automatically | Temporary storage                       |
+
+
+===============================================================================
+1) Bind Mounts (Manual Mapping)
+Bind Mount means directly connecting (or “binding”) a specific folder or file from your host system to a path inside the Docker container.
+ >>>>>>>>>So the container sees and uses your real files from your host machine — not a copy.
+
+Syntax: docker run -v /host/path:/container/path IMAGE_NAME
+Modern (recommended) syntax: docker run --mount type=bind,source=/host/path,target=/container/path IMAGE_NAME
+
+##########How Bind Mount Works (Internally)
+
+When you use -v /host/path:/container/path, Docker does the following:
+
+.............1)Checks if /host/path exists on your host machine.
+                       If not, Docker will create it (empty directory).
+.............2)Mounts that host folder into the container filesystem at /container/path.
+.............3)Now, whatever happens:
+                    Writing inside the container → appears on the host.
+                    Editing/deleting on the host → affects the container immediately..
+
+Description: You manually map a host directory or file to a path inside the container.
+====================================================================================================================
+2)Named Volumes (Docker-managed)
+Docker stores the data in a Docker-managed path (usually /var/lib/docker/volumes/), and you give it a name to identify and reuse.
+Docker stores it in its own path:
+                              /var/lib/docker/volumes/mydata/_data
+
+Syntax: docker volume create mydata
+        docker run -it -v mydata:/appdata ubuntu bash
+
+Moderan Syntax: docker run --mount source=mydata,target=/appdata ubuntu bash
+
+>>>>>>>>>>>>>> later you can terminate ubuntu container and use the mydata in different container then it iwll reflect the script.
+
+LAB:
+
+[root@ip-172-31-21-164 demo]# pwd
+/root/demo
+[root@ip-172-31-21-164 demo]# docker volume create infinity
+infinity
+[root@ip-172-31-21-164 demo]# docker volume ls
+DRIVER    VOLUME NAME
+local     infinity
+[root@ip-172-31-21-164 demo]# docker images
+REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+banti        latest    0981c390e66c   2 hours ago   134MB
+[root@ip-172-31-21-164 demo]# docker run -it --name cont1 -v infinity:/mnt/data banti
+root@d969ac4c392e:/# cd /mnt/data
+root@d969ac4c392e:/mnt/data# ls
+root@d969ac4c392e:/mnt/data# cat >f1
+this is very imp file
+root@d969ac4c392e:/mnt/data# exit
+exit
+[root@ip-172-31-21-164 demo]# docker run -it --name cont3 -v infinity:/mnt/data banti
+root@b67eb903ce3f:/# cd /mnt/data
+root@b67eb903ce3f:/mnt/data# ls -l
+total 4
+-rw-r--r--. 1 root root 23 Nov 10 09:17 f1
+root@b67eb903ce3f:/mnt/data#
+==================================================================================================================================================
+3)Anonymous Volume:
+You don’t specify a name or host path.
+Docker automatically creates a randomly named volume.
+
+Syntax: docker run -it -v /mnt/data ubuntu bash
+======================================================================================================================================
