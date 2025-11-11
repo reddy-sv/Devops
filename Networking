@@ -1,0 +1,123 @@
+Networking definition:
+
+Docker networking is the mechanism that allows containers to communicate with:
+
+Each other (container-to-container communication)
+The host machine
+The outside world (internet)
+
+Each container can have its own private IP address, and Docker provides drivers that control how containers are connected.
+
+Why networking matters:
+
+>Containers are isolated by default, so without networking they cannot talk to each other.
+>Networking enables microservices to communicate inside Docker, CI/CD pipelines, and cloud deployments.
+>Provides isolation, control, and security.
+
+###########Docker Network Drivers (3 Default Types)
+Docker provides 3 default network types:
+
+| Network Type         | Description                                            | Use Case                                     |
+| -------------------- | ------------------------------------------------------ | -------------------------------------------- |
+| **bridge** (default) | Containers connect to an internal virtual LAN with NAT | Standalone containers, isolated LAN          |
+| **host**             | Container shares host network directly, no NAT         | Performance-critical apps, monitoring agents |
+| **none**             | Container has no network, only loopback                | Full isolation, security or testing          |
+
+Docker also supports advanced networks (overlay, macvlan) for multi-host communication, but for interviews, focus on bridge, host, none.
+
+################Bridge Network (Default)
+
+>Docker creates a virtual bridge interface called docker0 on the host.
+>Containers attached to bridge get private IPs (e.g., 172.17.0.2).
+>Containers can communicate within the same bridge.
+>Containers access internet via NAT (Network Address Translation).
+>To expose ports to the host: use -p <host_port>:<container_port>.
+
+>List networks ##docker network ls
+>Inspect default bridge ##docker network inspect bridge
+>Run container on default bridge  ##docker run -dit --name <name> <image name> bash
+>Access container ##docker exec -it c1 bash
+
+##########################Container-to-Container Communication
+docker run -dit --name web1 ubuntu bash
+docker run -dit --name web2 ubuntu bash
+docker exec -it web1 bash
+ping <web2_IP>  >>>>>>>>>>>> # ping using IP
+
+####Summary — Bridge Network
+| Feature                | Details                           |
+| ---------------------- | --------------------------------- |
+| Driver                 | bridge                            |
+| Container IP           | Private subnet (e.g., 172.17.0.x) |
+| Container-to-container | Yes (same network)                |
+| Internet access        | Yes (via NAT)                     |
+| Host access            | Port mapping required (`-p`)      |
+| DNS resolution         | Only in user-defined bridge       |
+
+############################################################################################################################Host Network
+
+Container shares the host’s network stack.
+Container does not get a separate IP.
+Ports inside container = host ports (no -p needed).
+Useful for performance-intensive apps or network monitoring.
+
+Commands:
+
+docker run -dit --name <container name>  --network host <image name>
+docker exec -it <container name> bash
+hostname               # same as host
+
+####Summary — Host Network
+| Feature                | Details           |
+| ---------------------- | ----------------- |
+| Driver                 | host              |
+| Container IP           | Same as host      |
+| Container-to-container | Uses host network |
+| Internet access        | Direct via host   |
+| Isolation              | None              |
+| Port mapping           | Not needed        |
+
+=============================================================================================================================None Network
+
+Container has no network interface except loopback (lo).
+No IP, no internet, no container-to-container communication.
+Max isolation for security or testing purposes.
+
+Commands:
+
+docker run -dit --name <container name> --network none <image ID>  bash
+docker exec -it <container name> bash
+ip a                   # shows only lo
+ping google.com         # will fail
+
+Use Cases:
+
+Secure batch jobs with no network access
+Testing network isolation
+Manually connecting container to network later:  #########docker network connect bridge isolated
+
+
+Summary — None Network
+| Feature                | Details |
+| ---------------------- | ------- |
+| Driver                 | none    |
+| Container IP           | None    |
+| Container-to-container | No      |
+| Internet access        | No      |
+| Isolation              | Maximum |
+| Port mapping           | N/A     |
+
+########################## Visual Summary Table (All 3 Types)
+| Feature                | Bridge                          | Host           | None |
+| ---------------------- | ------------------------------- | -------------- | ---- |
+| Container IP           | Private (172.x.x.x)             | Host IP        | None |
+| Internet               | Yes (NAT)                       | Yes (Direct)   | No   |
+| Container-to-container | Yes                             | Yes (via host) | No   |
+| Isolation              | Medium                          | None           | Max  |
+| Port mapping           | Required                        | Not needed     | N/A  |
+| DNS resolution         | Name resolution in user-defined | N/A            | N/A  |
+
+
+
+
+
