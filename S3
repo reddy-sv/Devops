@@ -1,0 +1,372 @@
+S3:
+
+>>>>>>>>       : Simple Storage Service by AWS.
+Type of storage: Object Storage (not block or file storage).
+
+Key elements:
+
+Buckets: Containers to store objects (like folders in cloud).
+Objects: Files you upload (can be any type: text, image, video).
+   Keys: Unique identifiers for each object inside a bucket.
+Regions: Buckets live in AWS regions (e.g., eu-north-1).
+
+Properties:
+
+Infinite storage (scale without limits)
+High durability (11 nines)
+Pay-as-you-go pricing
+Encryption & security built-in
+
+##########################
+Why S3 is Important for Cloud Engineers:
+
+Data storage for apps, backups, logs, media files
+Hosting static websites
+Integration with AWS services like EC2, Lambda, CloudFront, RDS
+Part of DevOps automation: CI/CD pipelines often use S3
+Cost-effective storage solution
+
+================================================================================================
+
+S3 Storage Classes:
+
+In Amazon S3, storage class defines how and where your data is stored, and how much you pay for storing and retrieving it.
+
+💡 Think of it like choosing the right “locker” for your file:
+Fast locker (frequent use → more expensive)
+Cold locker (rarely opened → cheaper)
+Deep freezer (archival → very cheap but slow to access)
+
+S3 Standard
+- Purpose: Default storage for frequently accessed data
+- Access Frequency: Frequent
+- Availability: 99.99%
+- Durability: 99.999999999%
+- Retrieval Time: Immediate
+- Storage Cost: High
+- Retrieval Cost: None
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Base Tier
+- Real Use: Active app data, websites, user uploads
+
+S3 Standard-IA
+- Purpose: For infrequently accessed data but needs instant retrieval
+- Access Frequency: Infrequent
+- Availability: 99.9%
+- Durability: 99.999999999%
+- Retrieval Time: Immediate
+- Storage Cost: Medium
+- Retrieval Cost: Per GB retrieved
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Move after 30 days
+- Real Use: Monthly reports, audit logs
+
+S3 One Zone-IA
+- Purpose: Infrequent access and non-critical data
+- Access Frequency: Infrequent
+- Availability: 99.5%
+- Durability: 99.999999999%
+- Retrieval Time: Immediate
+- Storage Cost: Low
+- Retrieval Cost: Per GB retrieved
+- Stored in: 1 Availability Zone only
+- Lifecycle Example: Move after 60 days
+- Real Use: Temporary or re-creatable data
+
+S3 Intelligent-Tiering
+- Purpose: Automatically moves between frequent & infrequent tiers
+- Access Frequency: Variable
+- Availability: 99.9%
+- Durability: 99.999999999%
+- Retrieval Time: Immediate
+- Storage Cost: Medium (monitoring fee applies)
+- Retrieval Cost: Based on tier
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Best for unpredictable access
+- Real Use: Logs, media, ML datasets
+
+S3 Glacier Instant Retrieval
+- Purpose: Rarely accessed but instant access required
+- Access Frequency: Rare
+- Availability: 99.9%
+- Durability: 99.999999999%
+- Retrieval Time: Milliseconds
+- Storage Cost: Low
+- Retrieval Cost: Per GB retrieved
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Move after 90 days
+- Real Use: Archived legal or medical files
+
+S3 Glacier Flexible Retrieval (formerly Glacier)
+- Purpose: Long-term archival data (minutes to hours retrieval)
+- Access Frequency: Rare
+- Availability: 99.9%
+- Durability: 99.999999999%
+- Retrieval Time: 1 to 12 hours
+- Storage Cost: Very Low
+- Retrieval Cost: Per GB retrieved
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Move after 180 days
+- Real Use: Backups, audit logs, old media
+
+S3 Glacier Deep Archive
+- Purpose: Lowest-cost cold storage for long-term archival
+- Access Frequency: Very Rare
+- Availability: 99.9%
+- Durability: 99.999999999%
+- Retrieval Time: 12–48 hours
+- Storage Cost: Cheapest
+- Retrieval Cost: Per GB retrieved
+- Stored in: 3+ Availability Zones
+- Lifecycle Example: Move after 1 year
+- Real Use: Legal, tax, or historical records
+============================================================================================================================
+🧠 AWS CLI — Real-Time Commands for Cloud Engineers
+
+Setup & Configuration:
+| Command                       | Description                                                     | Example                       |
+| ----------------------------- | --------------------------------------------------------------- | ----------------------------- |
+| `aws configure`               | Configure credentials (Access Key, Secret, Region, Format)      | `aws configure`               |
+| `aws configure list`          | View your current configuration                                 | `aws configure list`          |
+| `aws sts get-caller-identity` | Verify IAM identity (check which user/role you’re logged in as) | `aws sts get-caller-identity` |
+| `aws ec2 describe-regions`    | List all available AWS regions                                  | `aws ec2 describe-regions`    |
+
+| Command                           | Description                        | Example                                                                                       |
+| --------------------------------- | ---------------------------------- | --------------------------------------------------------------------------------------------- |
+| `aws s3 ls`                       | List all S3 buckets                | `aws s3 ls`                                                                                   |
+| `aws s3 ls s3://mybucket`         | List objects in a bucket           | `aws s3 ls s3://mybucket`                                                                     |
+| `aws s3 mb s3://mybucket`         | Create a new bucket                | `aws s3 mb s3://demobucket926`                                                                |
+| `aws s3 rb s3://mybucket --force` | Remove a bucket (and its contents) | `aws s3 rb s3://oldbucket --force`                                                            |
+| `aws s3 cp`                       | Copy files to/from S3              | `aws s3 cp file.txt s3://mybucket/`                                                           |
+| `aws s3 sync`                     | Sync local folder with S3 bucket   | `aws s3 sync ./mydata s3://mybucket/`                                                         |
+| `aws s3 rm`                       | Delete object(s)                   | `aws s3 rm s3://mybucket/file.txt`                                                            |
+| `aws s3api put-bucket-versioning` | Enable versioning on a bucket      | `aws s3api put-bucket-versioning --bucket mybucket --versioning-configuration Status=Enabled` |
+
+=============================================================================================================================================================================================================================================================================
+
+🟢 1. You accidentally deleted important data in an S3 bucket — how would you recover it?
+
+Answer:
+
+If Versioning is enabled → restore an older version of the deleted object.
+
+If MFA Delete is enabled → protect from accidental/malicious deletion.
+
+Without versioning → data is permanently lost (unless backed up elsewhere).
+Tip: Always enable versioning + MFA Delete on critical buckets.
+
+🟢 2. You want to automatically move old data to cheaper storage — how would you do that?
+
+Answer:
+
+Use Lifecycle Policies.
+Example: Move objects to Standard-IA after 30 days, Glacier after 90 days, and delete after 365 days.
+This reduces cost automatically without manual cleanup.
+
+🟢 3. You want to share a file securely with a third party for a short time.
+
+Answer:
+
+Generate a Pre-signed URL using CLI or SDK:
+
+aws s3 presign s3://mybucket/data.zip --expires-in 3600
+
+
+The URL is valid for 1 hour; no need to make the bucket public.
+
+🟢 4. You must replicate all data to another AWS region for DR (Disaster Recovery).
+
+Answer:
+
+Enable Cross-Region Replication (CRR).
+
+Requires Versioning enabled on both source and destination buckets.
+
+IAM role must have replication permission.
+Example: Replicate from eu-north-1 → us-east-1 for business continuity.
+
+🟢 5. Your web app should serve static content from S3 — how will you configure it?
+
+Answer:
+
+Upload HTML, CSS, JS files to S3.
+
+Enable Static Website Hosting.
+
+Set index.html and error.html.
+
+Make bucket public or use CloudFront for CDN + HTTPS.
+Bonus: Use Route 53 to point domain → S3 endpoint.
+
+🟢 6. You need to restrict S3 access so that only EC2 instances in a VPC can access it.
+
+Answer:
+
+Create an S3 VPC Endpoint (Gateway or Interface type).
+
+Update bucket policy to allow only traffic from that VPC endpoint.
+
+"Condition": {"StringEquals": {"aws:SourceVpce": "vpce-xxxx"}}
+
+🟢 7. You must ensure S3 data is encrypted both at rest and in transit.
+
+Answer:
+
+At rest: Use SSE-S3 or SSE-KMS encryption.
+
+In transit: Enforce HTTPS-only access in bucket policy:
+
+"Condition": {"Bool": {"aws:SecureTransport": "false"}}
+
+
+→ Deny if not using HTTPS.
+
+🟢 8. You need to track who deleted or accessed specific objects in S3.
+
+Answer:
+
+Enable CloudTrail Data Events for that bucket.
+
+It logs all object-level actions (GetObject, DeleteObject).
+
+Send logs to CloudWatch or another S3 bucket for analysis.
+
+🟢 9. You’re uploading large files and uploads often fail midway.
+
+Answer:
+
+Use Multipart Upload to improve reliability and speed.
+
+Splits file into parts; failed parts retry individually.
+
+CLI:
+
+aws s3 cp largefile.zip s3://mybucket/ --storage-class STANDARD_IA
+
+🟢 10. You need to prevent accidental deletion of all objects in a bucket.
+
+Answer:
+
+Enable Versioning.
+
+Enable MFA Delete (requires MFA for object deletion).
+
+Optionally, apply IAM policy with "s3:DeleteObject": "Deny" for non-admin users.
+
+🟢 11. You must host data publicly, but block direct listing of objects.
+
+Answer:
+
+Enable Static Website Hosting, but disable “ListBucket” permission.
+
+Only allow GetObject access via specific URL patterns.
+Example policy snippet:
+
+"Action": "s3:GetObject",
+"Effect": "Allow",
+"Principal": "*",
+"Resource": "arn:aws:s3:::mybucket/*"
+
+🟢 12. You want to analyze large CSV files stored in S3 without downloading.
+
+Answer:
+
+Use Amazon Athena or S3 Select.
+
+S3 Select example: query specific columns or rows directly from object.
+
+Athena can query S3 data using standard SQL (serverless).
+
+🟢 13. Your app needs faster upload speed for global users.
+
+Answer:
+
+Enable S3 Transfer Acceleration.
+
+Uploads go via AWS CloudFront Edge locations for speed.
+
+Example:
+https://mybucket.s3-accelerate.amazonaws.com
+
+🟢 14. You have millions of small files, and performance is slow.
+
+Answer:
+
+Optimize object key naming — avoid sequential prefixes (e.g., use random UUIDs).
+
+Combine small files into larger batches (Parquet/zip).
+
+Use S3 Select or Athena instead of downloading all files.
+
+🟢 15. You need to allow another AWS account access to specific S3 objects.
+
+Answer:
+
+Use Bucket Policy with cross-account ARN:
+
+"Principal": {"AWS": "arn:aws:iam::123456789012:root"}
+
+
+Or create S3 Access Point or cross-account IAM role.
+
+🟢 16. You must store daily logs and delete them after 90 days automatically.
+
+Answer:
+
+Configure a Lifecycle Rule:
+
+Filter prefix = “logs/”
+
+Action: Delete after 90 days
+
+Optionally move to Glacier after 30 days.
+This fully automates log cleanup.
+
+🟢 17. You uploaded data, but Access Denied error occurs when app reads it.
+
+Answer:
+
+Check the following:
+
+IAM Role Permissions (s3:GetObject missing?)
+
+Bucket Policy (might deny access)
+
+Block Public Access settings
+
+Encryption (if KMS key restricts role).
+Fix based on what’s missing.
+
+🟢 18. You need to store confidential files and audit access history.
+
+Answer:
+
+Enable SSE-KMS encryption using your own KMS CMK.
+
+Enable CloudTrail data events for detailed audit logging.
+
+Use bucket policy condition to enforce KMS-only uploads.
+
+🟢 19. You need to ensure that no objects are publicly accessible across all buckets.
+
+Answer:
+
+Enable Block Public Access (Account Level) in the S3 console.
+
+This overrides bucket policies and ACLs globally.
+
+Best practice for enterprise-level compliance.
+
+🟢 20. You need to upload files from an EC2 instance to S3 securely.
+
+Answer:
+
+Create an IAM Role with s3:PutObject permission.
+
+Attach role to EC2 instance (no access keys needed).
+
+Use AWS CLI or SDK to upload securely:
+
+aws s3 cp /var/logs s3://mybucket/logs/ --recursive
+
+===========================================================================================================================================================================
