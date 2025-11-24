@@ -1,0 +1,94 @@
+IAM:
+
+AWS Identity and Access Management (IAM) is a web service that helps you securely control access to AWS services and resources for your users.
+
+It allows you to create and manage AWS users and groups.
+You can grant or deny permissions to AWS resources.
+It enables secure access management both for human users and applications (programmatic access).
+
+Think of IAM as the gatekeeper of your AWS environment.
+
+Key Components of IAM:
+
+######A. Users
+Represents a person or an application that interacts with AWS.
+Each user has:
+Username
+Security credentials:
+Password (for AWS Management Console)
+Access keys (for programmatic access)
+Multi-Factor Authentication (MFA)
+
+Example: subbareddy user with programmatic access to S3.
+
+########B. Groups
+A collection of IAM users.
+Makes it easier to assign permissions collectively rather than individually.
+
+Example: Create a group Developers and attach AmazonS3FullAccess policy; all users in this group inherit these permissions.
+
+#######C. Roles
+Roles are similar to users but without permanent credentials.
+Used for AWS services, EC2 instances, Lambda functions, or external accounts to assume temporary access.
+
+Example:  An EC2 instance running a script that needs to access an S3 bucket. You can attach a role to the EC2 instance instead of using access keys.
+
+#####D. Policies
+JSON documents that define permissions.
+
+Two main types:
+Managed Policies – Predefined by AWS (e.g., AdministratorAccess, AmazonS3ReadOnlyAccess).
+Inline Policies – Custom policies attached to a specific user, group, or role.
+
+===================================================================================================================================================================================
+
+Types of Access in IAM:
+
+IAM supports two types of access:
+
+#########AWS Management Console Access
+Login via web browser using username/password.
+Optional MFA adds extra security.
+
+######## Programmatic Access
+Access via AWS CLI, SDKs, or APIs.
+Requires Access Key ID and Secret Access Key.
+============================================================================================================================================
+
+IAM Best Practices
+
+#Use Least Privilege Principle
+Only grant permissions required to perform a task.
+#Enable Multi-Factor Authentication (MFA)
+Adds extra security to your account.
+#Avoid Root Account Usage
+Root account has full privileges; only use for account setup.
+#Use Roles for EC2 and Lambda
+Avoid hardcoding access keys in applications.
+#Rotate Credentials Regularly
+Change passwords and access keys periodically.
+#Monitor with AWS CloudTrail
+Track all IAM actions and detect unauthorized activity.
+========================================================================================================================
+
+1)What is the difference between IAM roles, users, and policies?
+
+How to answer (short version):
+| Component  | Definition                                           | Example                         |
+| ---------- | ---------------------------------------------------- | ------------------------------- |
+| **User**   | Permanent identity for a person/app with credentials | Developer `subbareddy`          |
+| **Role**   | Temporary identity assumed by trusted entity         | EC2 accessing S3 bucket         |
+| **Policy** | JSON document defining permissions                   | `AmazonS3ReadOnlyAccess` policy |
+
+Key point: Roles are for temporary access; policies define permissions; users have permanent credentials.
+
+
+2)What is the difference between a managed policy and an inline policy?
+
+Managed Policy: Reusable policy that can be attached to multiple users, groups, or roles. Can be AWS-managed or customer-managed.
+Example: AdministratorAccess, AmazonS3ReadOnlyAccess.
+
+Inline Policy: Policy attached to a specific user, group, or role, and exists only for that entity.
+Example: Custom policy giving access to a specific S3 bucket bottle1234567890.
+
+Key point: Managed policies are reusable; inline policies are tightly bound to a single identity.
