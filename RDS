@@ -1,0 +1,69 @@
+RDS:
+
+Amazon RDS is a managed relational database service provided by AWS.
+It allows you to run and manage relational databases in the cloud without worrying about:
+>Hardware provisioning
+>Database setup
+>Patching
+>Backups
+>Scaling
+RDS supports multiple database engines, like MySQL, PostgreSQL, MariaDB, Oracle, SQL Server, and Amazon Aurora.
+=========================================================================================================================
+Key Features of RDS:
+
+#Managed Service
+ AWS handles maintenance tasks like backups, patching, and monitoring.
+#Scalability
+ Vertical scaling: Increase instance size or storage.
+ Horizontal scaling: Read replicas for read-heavy workloads (MySQL, PostgreSQL, Aurora).
+#High Availability
+ Multi-AZ Deployment: Automatically creates a standby instance in another AZ.
+ Automatic failover in case the primary DB fails.
+#Automatic Backups
+ Daily automated snapshots and transaction logs.
+ Point-in-time recovery available.
+#Security
+ VPC Isolation: Run RDS in a private subnet.
+ Encryption at rest and in transit: Using AWS KMS and SSL/TLS.
+ IAM integration: Control access to RDS operations.
+#Monitoring
+ CloudWatch metrics for CPU, storage, connections, read/write IOPS.
+ ===================================================================================================================
+Supported Database Engines:
+
+#MySQL – Open-source, widely used.
+#PostgreSQL – Advanced open-source DB with rich features.
+#MariaDB – Fork of MySQL, open-source.
+#Oracle – Enterprise database with licensing options.
+#SQL Server – Microsoft relational database.
+#Amazon Aurora – AWS’s high-performance MySQL/PostgreSQL compatible database.
+==========================================================================================================================
+RDS Deployment Options:
+
+1)Single-AZ Deployment
+Database runs in one availability zone.
+Less expensive, but no automatic failover.
+
+2)Multi-AZ Deployment
+Database has a primary and standby instance in different AZs.
+Automatic failover for high availability.
+
+3)Read Replicas
+Scales read-heavy workloads.
+Can be in the same region or cross-region.
+===========================================================================================================================
+Example 1: Web Application Database
+A web app needs a MySQL database.
+Use RDS MySQL Single-AZ for dev/test.
+Use Multi-AZ for production to ensure uptime.
+Backup is automatic, and monitoring is through CloudWatch.
+
+Example 2: Read-Heavy Reporting
+Analytics reports generate high read load.
+Create read replicas to offload reads from primary DB.
+Aurora or PostgreSQL is ideal for low-latency read performance.
+
+Example 3: Cross-Region Disaster Recovery
+Primary DB in us-east-1.
+Read replica in us-west-2 for DR and analytics.
+Can promote replica to primary in case of disaster.
