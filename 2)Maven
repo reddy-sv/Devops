@@ -1,0 +1,121 @@
+####### 1) Maven Build Lifecycle
+
+Maven follows a standardized build lifecycle that defines a sequence of phases. 
+Each phase is responsible for a specific task, such as compiling code or packaging the project. 
+Understanding the lifecycle is essential for configuring builds in Jenkins and other CI/CD tools.
+
+Maven Build Phases:
+
+1)Validate: Validates the project’s structure and configuration (ensures that the pom.xml is correct).
+2)Compile : Compiles the source code.
+3)Test    : Runs unit tests using testing frameworks like JUnit or TestNG.
+4)Package : Packages the compiled code into a JAR/WAR/EAR file (depending on the project).
+5)Verify  : Performs additional verification on the packaged code, such as integration tests.
+6)Install : Installs the packaged code into the local repository (e.g., ~/.m2/repository) for use by other projects.
+7)Deploy  : Deploys the packaged artifact to a remote repository (e.g., Nexus or Artifactory) so that it can be used by other environments or projects.
+
+Common Commands for Maven Build Lifecycle:
+
+mvn clean install          # Clean the project and install to the local repository
+mvn clean package          # Clean and package the code into an artifact (e.g., JAR)
+mvn test                   # Run unit tests
+mvn deploy                 # Deploy the artifact to a remote repository
+mvn verify                 # Verify the artifact and tests
+
+
+######## 2) pom.xml (Project Object Model)
+
+The pom.xml is the configuration file for Maven, and it's crucial for setting up your build environment, managing dependencies, and configuring plugins.
+
+Key Sections in pom.xml:
+
+Dependencies       : Specifies external libraries or modules required by the project.
+Plugins            : Defines plugins that will be used for tasks like compiling, testing, packaging, and deploying the project.
+Repositories       : Specifies the repositories where Maven can find and download dependencies (e.g., Maven Central or custom repositories like Nexus).
+Build Configuration: Defines settings for the build process, such as the output directory, resources to include/exclude, and other project-specific configurations.
+
+Example pom.xml:
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>my-app</artifactId>
+    <version>1.0.0</version>
+
+    <dependencies>
+        <!-- Example dependency -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Example Maven plugin configuration -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+
+
+############# 3) Dependency Management
+
+One of Maven’s strongest features is dependency management. 
+Maven automatically resolves and downloads the required libraries for the project. 
+It supports both transitive dependencies (dependencies of dependencies) and direct ones.
+
+How Dependency Management Works:
+Dependencies are specified in the <dependencies> section of the pom.xml file.
+Maven will automatically download these dependencies from repositories like Maven Central or other configured repositories.
+Maven ensures that the correct version of each dependency is used, avoiding conflicts.
+
+Example Dependencies in pom.xml:
+<dependencies>
+    <!-- Example of a direct dependency -->
+    <dependency>
+        <groupId>org.springframework</groupId>
+        <artifactId>spring-core</artifactId>
+        <version>5.3.8</version>
+    </dependency>
+
+    <!-- Example of a test dependency -->
+    <dependency>
+        <groupId>org.junit.jupiter</groupId>
+        <artifactId>junit-jupiter-api</artifactId>
+        <version>5.7.1</version>
+        <scope>test</scope>
+    </dependency>
+</dependencies>
+
+################## 4) Plugins
+
+Maven's plugins allow you to extend its functionality. 
+Plugins are responsible for tasks like compiling code, running tests, building Docker images, deploying to Kubernetes, and more.
+
+Common Maven Plugins:
+
+Maven Compiler Plugin: Compiles the source code.
+Maven Surefire Plugin: Runs unit tests.
+Maven JAR Plugin     : Packages the compiled code into a JAR.
+Maven Docker Plugin  : Builds Docker images from Dockerfiles.
+Maven Deploy Plugin  : Deploys artifacts to repositories (e.g., Nexus, Artifactory).
+
+============================================================================================================================================
+Maven to handle the build, testing, and packaging of the application.
+JUnit (or another testing framework) for running unit tests.
+Maven compiles the code, runs tests, and creates the build artifact (e.g., JAR/WAR file).
+After Maven successfully packages the application into a JAR/WAR file, the artifact can be stored in an artifact repository like Nexus or Artifactory.
+This allows other parts of the pipeline (or different projects) to reuse the artifact.
