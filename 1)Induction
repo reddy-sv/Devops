@@ -1,0 +1,32 @@
+Kubernetes:
+Kubernetes is an orchestration platform for containers.
+It automates the deployment, scaling, and management of containerized applications.
+
+Orchestration:
+Orchestration refers to the process of automating the management, coordination, and arrangement of complex systems and workflows.
+In the context of computing and IT, orchestration involves automating tasks like provisioning, deploying, scaling, and managing infrastructure and applications.
+
+K8s Architecture Overview:
+
+Master Node: The control center (API Server, Scheduler, Controller Manager) that makes decisions about the cluster (e.g., scheduling Pods).
+Worker Nodes: These are the machines that run your containers (Pods). They communicate with the Master Node.
+
++-------------------+        +---------------------+
+|    Master Node    | <----> |    Worker Node(s)   |
+|  (API Server,     |        |  (Kubelet,kubeproxy)|
+|   Scheduler,etcd  |        |                     |
+|   Controller)     |        |                     |
++-------------------+        +---------------------+
+
+Kubernetes Components:
+
+Control Plane:(Master Node)
+API Server: Communicates with the client and all other components. It’s the "gateway" to the cluster.
+Scheduler: Decides on which Node a Pod should run.
+Controller Manager: Ensures the desired state of the system is achieved.
+Etcd: Stores all cluster data (state of the cluster, configurations, etc.)
+
+Node Components:
+Kubelet: Ensures that containers are running in Pods.
+Kube Proxy: Manages the network rules for services.
+Container Runtime: The software that runs containers (e.g., Docker, containerd).
