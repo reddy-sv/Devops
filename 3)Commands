@@ -1,0 +1,73 @@
+1) Check Cluster & Nodes
+
+✅ Check cluster connection (👉 Confirms cluster is reachable) #kubectl cluster-info
+✅ Check nodes (👉 Shows worker nodes, Status should be Ready) #kubectl get nodes
+
+2) Namespace Commands
+
+✅ List namespaces #kubectl get ns
+✅ Work in a specific namespace #kubectl get pods -n dev
+
+📌 Real time:  Prod, Dev, QA apps run in different namespaces
+
+3) Pod Commands (MOST IMPORTANT)
+
+✅ List pods #kubectl get pods
+✅ Detailed pod info #kubectl get pods -o wide    >>>>>> 👉 Shows node name & IP
+✅ Describe pod (VERY COMMON) #kubectl describe pod pod-name  >>>> 👉 Used when pod is CrashLoopBackOff / Pending
+  📌 Interview line: “describe pod is my first troubleshooting command”
+✅ Pod logs (daily) #kubectl logs pod-name
+   For container inside pod: #kubectl logs pod-name -c container-name
+  📌 Real time: App error? → check logs
+
+4)Deployment Commands (Real production work)
+
+✅ List deployments #kubectl get deploy
+✅ Describe deployment #kubectl describe deploy deploy-name
+✅ Scale application #kubectl scale deploy deploy-name --replicas=5
+  📌 Real time: High traffic → scale replicas
+✅ Restart deployment (VERY COMMON) #kubectl rollout restart deploy deploy-name
+  📌 Used when:Config change, App stuck, Memory issue
+
+5) Service Commands (Networking)
+
+✅ List services #kubectl get svc
+✅ Describe service #kubectl describe svc svc-name
+   📌 Real time:App not accessible → check service
+
+6) ConfigMap & Secret (Daily DevOps work)
+
+✅ List ConfigMaps #kubectl edit cm configmap-name
+✅ List secrets #kubectl get secrets
+    ⚠️ Secrets are base64 encoded
+✅ Edit ConfigMap (Real time fix) #kubectl edit cm configmap-name
+  📌 Used when: Environment variable change without rebuild
+
+7) Troubleshooting Commands (VERY IMPORTANT)
+
+✅ Events (gold command) #kubectl get events --sort-by=.metadata.creationTimestamp
+   📌 Shows: Image pull errors, Scheduling issues, Crash reasons
+✅ Check resource usage #kubectl top pods
+   📌 Used when:CPU / memory issue
+
+8) YAML & Apply Commands (Daily CI/CD)
+
+✅ Apply YAML #kubectl apply -f deployment.yaml
+✅ Delete resource #kubectl delete -f deployment.yaml
+✅ Get full YAML from running object ###kubectl get deploy deploy-name -o yaml
+  📌 Real time: Debug production config
+
+9) Exec into Pod (Like SSH)  #kubectl exec -it pod-name -- /bin/bash
+  📌 Used when: Need to check files, env vars, connectivity
+
+10) Quick “All-in-One” Debug Commands
+
+#kubectl get all
+#kubectl get pods -A
+#kubectl get pods --field-selector=status.phase!=Running
+
+======================
+One-line Interview Answer:
+
+“In real time, I mainly use kubectl get, describe, logs, events, and rollout restart to manage and troubleshoot Kubernetes workloads.”
+
