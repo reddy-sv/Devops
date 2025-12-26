@@ -1,0 +1,69 @@
+1) Pod: 👉 Smallest unit in Kubernetes
+           Runs one or more containers
+           Application actually runs here
+  Interview line:
+                  Pod is the smallest deployable unit in K8s.
+2) ReplicaSet: Maintains pod count
+               Ensures required number of pods are always running
+               If a pod is deleted → new pod is created.
+  Interview line:
+               ReplicaSet maintains the desired number of pod replicas.
+3) Deployment ⭐ (Most Important): 👉 Manages application lifecycle
+             Creates ReplicaSets
+             Supports scaling, rolling updates, rollback
+             Used in production
+  Interview line:
+               Deployment is used to deploy, update, and manage applications.
+4) Service: 👉 Exposes pods to network
+             Provides stable IP & DNS
+             Pods IPs change, Service IP does not
+  Interview line:
+               Service provides stable access to pods.
+5) Namespace: 👉 Logical separation
+                Used to separate dev / test / prod
+                Same cluster, different environments
+  Interview line:
+               Namespace logically isolates Kubernetes resources.
+6) ConfigMap: 👉 Stores configuration data
+                 Non-sensitive data
+                 Keeps config outside application code
+  Interview line:
+               ConfigMap stores application configuration.
+7) Secret: 👉 Stores sensitive data
+              Passwords, tokens, keys
+              More secure than ConfigMap.
+  Interview line:
+            Secret stores sensitive information securely.
+8) Ingress: 👉 Manages external access
+               HTTP/HTTPS routing
+               Uses domain or path-based routing
+  Interview line:
+              Ingress manages external access to services.
+9) Volume: 👉 Persistent storage
+              Stores data beyond pod life
+              Used for logs, uploads, DB data
+  Interview line:
+           Volumes provide persistent storage for pods.
+
+============================================================================
+
+***************Relationship (VERY IMPORTANT ⭐)
+Deployment
+  ↓
+ReplicaSet
+  ↓
+Pod
+  ↓
+Container
+
+=========================Notebook Summary
+Pod – Runs containers
+ReplicaSet – Maintains pod count
+Deployment – Manages updates & scaling
+Service – Stable network access
+Namespace – Resource isolation
+ConfigMap – Configuration data
+Secret – Sensitive data
+Ingress – External routing
+Volume – Persistent storage
+
