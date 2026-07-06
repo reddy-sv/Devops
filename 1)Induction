@@ -1,30 +1,90 @@
-##Git Configuration
-git config --global user.name "Your Name"
-git config --global user.email "youremail@example.com"
+1. What is Git?
 
-##Check your Git configuration:
-git config --list
+Definition: Git is a Distributed Version Control System (DVCS) used to track changes in files and manage different versions of a project.
+Simple Telugu: Git అంటే Project లో జరిగిన Changes ని Track చేసి ప్రతి Version ని Store చేసే Software
 
-##Initialize a new Git repository:
-git init
+2. What is Version Control?
 
-##Clone an existing repository:
-git clone <repository-url>
+Without Git:Very confusing. 
+Project
+│
+├── final.java
+├── final_new.java
+├── final_latest.java
+├── final_latest2.java
 
-##Check the status of your repository:
-git status
+With Git:Git manages every version.
+Project
+│
+├── Commit 1
+├── Commit 2
+├── Commit 3
 
-##Stage a specific file for commit:
-git add <filename>
+3. What is a Repository?
 
-##Stage all files for commit:
-git add .
+A Repository is a project managed by Git.
+When you execute: git init (Git creates a hidden folder:) --> .git (This folder stores all Git information.)
 
-##Unstage a file (if you added it by mistake):
-git reset <filename>
+What does git init do? 
+It creates a hidden .git directory. Inside .git, Git stores:
+Commit History
+Branches
+Configuration
+Logs
+Repository Metadata
+HEAD
 
-##Commit changes:
-git commit -m "Your commit message"
+Important: git init does not start tracking files automatically.
 
-##View the commit history:
-git log
+How to verify a Git Repository? 
+Method 1: git status --> If it shows: On branch master/On branch Main , It is a Git Repository.
+Method 2: ls -la If you see .git It is a Git Repository.
+
+4. Working Directory
+The Working Directory is where you create or edit files.
+The changes are only in your Working Directory,Nothing is saved into Git yet.
+
+5. Staging Area
+git add filename --> Move selected changes to the Staging Area.
+Think of it as: Ready for Commit.
+
+6. Commit
+git commit -m "message" -->  Commit creates a permanent snapshot of your project.
+Every commit has:Commit ID
+Author
+Date
+Commit Message
+
+7. Git Workflow
+Working Directory
+        │
+        ▼
+git add
+        │
+        ▼
+Staging Area
+        │
+        ▼
+git commit
+        │
+        ▼
+Local Repository
+
+8. git status 
+Most frequently used command, Shows:
+Current Branch
+Untracked Files
+Staged Files
+Modified Files
+Commit Status
+
+9. git init vs git clone
+git init : Creates a new empty repository --> creates .git
+git clone : Downloads an existing repository (git clone <repository-url>)
+
+Clone automatically:
+
+Downloads project files
+Downloads .git
+Configures the remote repository (origin)
+----------------------------------------->No need to run git init after cloning.
