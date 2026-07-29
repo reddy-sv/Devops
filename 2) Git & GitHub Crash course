@@ -1,0 +1,138 @@
+1. git init
+
+Purpose:
+Initializes a new Git repository.
+Creates a hidden .git directory.
+Command: git init
+
+2. git config
+
+Purpose:
+Configure Git username and email.
+Used to identify who created the commits.
+
+Commands:
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+Verify: git config --list
+
+3. git add
+
+Purpose
+Moves files from Working Directory to Staging Area.
+
+Commands
+git add filename
+git add .
+git add *.sh
+
+4. git commit
+
+Purpose
+Saves staged changes permanently into Git history.
+
+Command: git commit -m "Commit Message"
+Example: git commit -m "Added Login Module"
+
+5. git log
+
+Purpose
+Shows commit history.
+
+Command: git log
+Short format: git log --oneline
+
+6. git checkout <commit-id>
+
+Purpose:
+View an old commit.
+HEAD moves to that commit.
+Repository enters Detached HEAD state.
+
+Command: git checkout <commit-id>
+Return to branch: git checkout master
+
+7. HEAD
+
+Purpose:
+HEAD points to the current commit.
+Normally it points to the latest commit of the current branch.
+After checking out a commit ID, HEAD becomes detached.
+
+8. git revert
+
+Purpose
+Undo a commit safely.
+Creates a new commit.
+Original commit is NOT deleted.
+
+Command: git revert <commit-id>
+Example:   A → B → C
+After:  A → B → C → Revert C
+Real Time: Used after code is pushed to GitHub.
+
+9. git reset --hard
+
+Purpose
+Move the branch back to a previous commit.
+Removes commits after the selected commit from the current branch.
+Restores files to that commit's state.
+
+Command: git reset --hard <commit-id>
+
+Example
+
+Before: A → B → C
+After: A Use Mostly for local changes before sharing.
+
+10. .gitignore
+
+Purpose
+Ignore files and folders that Git should not track.
+
+Example
+*.log
+*.tmp
+node_modules/
+
+11. git branch
+
+Purpose:List all local branches.
+
+Command: git branch
+Create branch: git branch <branchname>
+
+12. git checkout
+
+Purpose: Switch to another branch.
+
+Command:  git checkout <branchname>
+
+13. git checkout -b
+
+Purpose: Create a new branch and switch to it.
+
+Command: git checkout -b feature
+
+14. Delete Branch
+
+Delete merged branch #git branch -d branchname
+Force delete #git branch -D branchname
+
+15. git merge
+
+Purpose: Merge one branch into the current branch.
+
+Command: git merge branchname
+
+Example
+
+master
+   \
+    feature
+
+After merge
+
+master
+   |
+feature
