@@ -136,3 +136,205 @@ After merge
 master
    |
 feature
+
+16. Remote Repository
+
+Purpose:
+A Remote Repository is a central Git repository hosted on GitHub, GitLab, Bitbucket, or Azure DevOps.
+Used for collaboration, backup, and CI/CD integration.
+
+Example:
+
+Local Repository  ←→  GitHub Remote Repository
+17. git remote add
+
+Purpose:
+Connect a local repository to a remote repository.
+
+Command:
+
+git remote add origin <repository-url>
+
+Example:
+
+git remote add origin https://github.com/reddy-sv/Devops.git
+18. origin
+
+Purpose:
+origin is the default alias (short name) for the remote repository.
+Instead of typing the full GitHub URL every time, Git uses the name origin.
+
+Example:
+
+origin
+   │
+   ▼
+https://github.com/reddy-sv/Devops.git
+19. git remote
+
+Purpose:
+Displays the configured remote repository names.
+
+Command:
+
+git remote
+
+Example Output:
+
+origin
+20. git remote -v
+
+Purpose:
+Displays the remote repository name along with Fetch and Push URLs.
+
+Command:
+
+git remote -v
+
+Example Output:
+
+origin  https://github.com/reddy-sv/Devops.git (fetch)
+origin  https://github.com/reddy-sv/Devops.git (push)
+21. git push
+
+Purpose:
+Uploads local commits to the remote repository.
+
+Command:
+
+git push origin branchname
+
+Example:
+
+git push origin Main
+22. git push -u
+
+Purpose:
+Pushes the branch and sets the upstream (tracking) branch.
+
+Command:
+
+git push -u origin feature
+
+Next Time:
+
+git push
+
+(No need to specify the branch again.)
+
+23. git clone
+
+Purpose:
+Copies an existing remote repository to your local machine.
+
+Command:
+
+git clone <repository-url>
+
+Example:
+
+git clone https://github.com/reddy-sv/Devops.git
+24. git fetch
+
+Purpose:
+Downloads the latest changes from the remote repository without merging them into the current branch.
+
+Command:
+
+git fetch origin
+25. git pull
+
+Purpose:
+Downloads the latest changes from the remote repository and merges them into the current branch.
+
+Command:
+
+git pull origin Main
+
+Formula:
+
+git pull = git fetch + git merge
+26. Fetch vs Pull
+git fetch	git pull
+Downloads changes only	Downloads and merges changes
+Safe to review changes	Updates current branch immediately
+27. Pull Request (PR)
+
+Purpose:
+Request to merge changes from one branch into another branch.
+
+Workflow:
+
+Feature Branch
+      │
+      ▼
+Pull Request
+      │
+      ▼
+Main Branch
+28. When do we create a Pull Request?
+
+Real-Time Scenarios:
+
+Bug Fix
+New Feature
+Enhancement
+Terraform Changes
+Jenkinsfile Changes
+Kubernetes YAML Changes
+Dockerfile Changes
+Documentation Updates
+Hotfixes
+29. Pull Request Process
+Manager/Jira Task
+        │
+        ▼
+Create Feature Branch
+        │
+        ▼
+Development
+        │
+        ▼
+git add
+        │
+        ▼
+git commit
+        │
+        ▼
+git push
+        │
+        ▼
+Create Pull Request
+        │
+        ▼
+Code Review
+        │
+        ▼
+Approval
+        │
+        ▼
+Merge
+        │
+        ▼
+Delete Feature Branch
+30. Fork
+
+Purpose:
+Creates a copy of another user's repository in your GitHub account.
+Mostly used for Open Source contributions.
+
+Workflow:
+
+Original Repository
+        │
+        ▼
+Fork
+        │
+        ▼
+Your Repository
+
+31. Pull Request vs Fork
+Pull Request	                                Fork
+Merge changes into another branch	           Create a copy of a repository
+Used in company projects	                    Used mostly in Open Source
+Requires repository access	                    Does not require write access
